@@ -2,11 +2,9 @@ import { vDom } from "../core/vdom";
 
 /** @jsx vDom.createElement */
 const App = () => (
-  <div>
-    <h1 className="test" onClick="testClick">
-      Hello, Virtual DOM with <span className="ptag">JSX!</span>
-    </h1>
-  </div>
+  <h1 className="test" onClick="testClick">
+    Hello, Virtual DOM withsss
+  </h1>
 );
 
 const container = document.getElementById("root");

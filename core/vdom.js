@@ -1,7 +1,23 @@
 import { setProps } from "../utils/setProps";
+import { diff } from "./diff";
+import { applyPatch } from "./patch";
 
 function render(element, container) {
-  // Check if the element is a functional component
+  let oldNode = container._vDOM;
+  if (oldNode) {
+    let patch = diff(oldNode, element);
+    if (patch) {
+      applyPatch(patch, oldNode, element);
+      container._vDOM = element;
+    } else {
+      return;
+    }
+  } else {
+    mountNewElement(element, container);
+    container._vDOM = element;
+  }
+}
+function mountNewElement(element, container) {
   if (typeof element.type === "function") {
     const component = element.type(); // Call the component
     render(component, container); // Recursively render the component
@@ -30,13 +46,12 @@ function render(element, container) {
     const textNode = document.createTextNode(children);
     newElement.appendChild(textNode);
   }
-
+  container._vDOM = element;
   // Append the newly created element to the container, if it exists
   if (container) {
     container.appendChild(newElement);
   }
 }
-
 function createElement(type, props, ...children) {
   return {
     type,
