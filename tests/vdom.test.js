@@ -2,9 +2,10 @@ import { vDom } from "../core/vdom";
 
 /** @jsx vDom.createElement */
 const App = () => (
-  <h1 className="test" onClick="testClick">
+  <div className="test" onClick="testClick" disabled="false">
     Hello, Virtual DOM withsss
-  </h1>
+  </div>
+
 );
 
 const container = document.getElementById("root");

@@ -3,6 +3,8 @@ import { diff } from "./diff";
 import { applyPatch } from "./patch";
 
 function render(element, container) {
+  diff(element, container)
+  //this is checking if the element is rendering for the first time or not
   let oldNode = container._vDOM;
   if (oldNode) {
     let patch = diff(oldNode, element);
@@ -19,8 +21,8 @@ function render(element, container) {
 }
 function mountNewElement(element, container) {
   if (typeof element.type === "function") {
-    const component = element.type(); // Call the component
-    render(component, container); // Recursively render the component
+    const component = element.type(); 
+    render(component, container); 
     return;
   }
 
@@ -46,11 +48,7 @@ function mountNewElement(element, container) {
     const textNode = document.createTextNode(children);
     newElement.appendChild(textNode);
   }
-  container._vDOM = element;
-  // Append the newly created element to the container, if it exists
-  if (container) {
-    container.appendChild(newElement);
-  }
+
 }
 function createElement(type, props, ...children) {
   return {
