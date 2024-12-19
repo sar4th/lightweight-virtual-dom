@@ -1,23 +1,34 @@
 import { setProps } from "../utils/setProps";
 import { diff } from "./diff";
-import { applyPatch } from "./patch";
+import applyPatch from "./patch"
+
+// function render(element, container) {
+
+//   diff(element, container)
+//   //this is checking if the element is rendering for the first time or not
+//   let oldNode = container._vDOM;
+//   if (oldNode) {
+//     let patch = diff(oldNode, element);
+//     if (patch) {
+//       applyPatch(patch, oldNode, element);
+//       container._vDOM = element;
+//     } else {
+//       return;
+//     }
+//   } else {
+//     mountNewElement(element, container);
+//     container._vDOM = element;
+//   }
+// }
 
 function render(element, container) {
-  diff(element, container)
-  //this is checking if the element is rendering for the first time or not
-  let oldNode = container._vDOM;
-  if (oldNode) {
-    let patch = diff(oldNode, element);
-    if (patch) {
-      applyPatch(patch, oldNode, element);
-      container._vDOM = element;
-    } else {
-      return;
-    }
-  } else {
+  if (!container._vDOM) {
     mountNewElement(element, container);
     container._vDOM = element;
+    return;
   }
+
+  console.log("Diff logic to be added later");
 }
 function mountNewElement(element, container) {
   if (typeof element.type === "function") {
@@ -27,21 +38,17 @@ function mountNewElement(element, container) {
   }
 
   const { type, props, children } = element;
-
-  // Create a new DOM element
   const newElement = document.createElement(type);
 
-  // Set properties
   setProps(newElement, props);
 
-  // Append children if they are text or elements
   if (Array.isArray(children)) {
     children.forEach((child) => {
       if (typeof child === "string") {
         const textNode = document.createTextNode(child);
         newElement.appendChild(textNode);
       } else {
-        render(child, newElement); // Recursively render child elements
+        render(child, newElement);
       }
     });
   } else if (typeof children === "string") {
@@ -49,14 +56,13 @@ function mountNewElement(element, container) {
     newElement.appendChild(textNode);
   }
 
+  container.appendChild(newElement);
 }
+
 function createElement(type, props, ...children) {
-  return {
-    type,
-    props,
-    children,
-  };
+  return { type, props, children };
 }
+
 
 export const vDom = {
   createElement,

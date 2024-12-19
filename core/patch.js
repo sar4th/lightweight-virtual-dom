@@ -1,4 +1,5 @@
 export function patch(patch, element, container) {
+  
   // Check if the element is a functional component
   if (typeof element.type === "function") {
     const component = element.type(); // Call the component
