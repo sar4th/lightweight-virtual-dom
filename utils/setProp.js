@@ -11,3 +11,6 @@ export function setProp($target, name, value) {
 
   $target.setAttribute(DOMAttribute, value);
 }
+export function addEventListeners($target, name,value) {
+
+}

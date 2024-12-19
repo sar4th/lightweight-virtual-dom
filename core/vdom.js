@@ -22,11 +22,12 @@ import applyPatch from "./patch"
 // }
 
 function render(element, container) {
-  if (!container._vDOM) {
+
+  // if (!container._vDOM) {
     mountNewElement(element, container);
-    container._vDOM = element;
+    // container._vDOM = element;
     return;
-  }
+  // }
 
   console.log("Diff logic to be added later");
 }
@@ -43,11 +44,15 @@ function mountNewElement(element, container) {
   setProps(newElement, props);
 
   if (Array.isArray(children)) {
+    
     children.forEach((child) => {
+      console.log(child, "child");
+      
       if (typeof child === "string") {
         const textNode = document.createTextNode(child);
         newElement.appendChild(textNode);
       } else {
+        
         render(child, newElement);
       }
     });

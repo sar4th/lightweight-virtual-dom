@@ -11,7 +11,6 @@ const newDOm={
     
   }
   const isDeepEqual = (newDOm, oldDom) => {
-    debugger
 
     const oldDomArr = Object.keys(oldDom);
     const newDomArr = Object.keys(newDOm);

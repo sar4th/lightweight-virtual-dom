@@ -60,7 +60,7 @@ const isDeepEqual = (object1, object2) => {
   if (objKeys1.length !== objKeys2.length) return false;
 
   for (var key of objKeys1) {
-    debugger
+  
     const value1 = object1[key];
     const value2 = object2[key];
 
