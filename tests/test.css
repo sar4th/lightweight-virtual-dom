@@ -4,3 +4,12 @@
 .ptag {
   color: blue;
 }
+.h1 {
+  color: rgb(117, 228, 219);
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

@@ -2,9 +2,8 @@ import { vDom } from "../core/vdom";
 
 /** @jsx vDom.createElement */
 const App = () => (
-  <div>
-    <h1>Hello, Virtual DOM</h1>
-    <button onClick={() => alert("clicked")}>click me</button>
+  <div class="wrapper">
+    <h1 class="h1">Hello from virtual dom</h1>
   </div>
 );
 
